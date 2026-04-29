@@ -1,0 +1,24 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+out/
+
+# 환경변수 (절대 GitHub에 올라가면 안 됨)
+.env
+application-secret.yml
+
+# QueryDSL 생성 파일
+src/main/generated/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Log
+*.log
+logs/
