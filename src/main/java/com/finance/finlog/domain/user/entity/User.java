@@ -31,6 +31,9 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private Provider provider;
 
+    @Column(nullable = false)
+    private String providerId;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;

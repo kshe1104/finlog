@@ -15,7 +15,6 @@ spring:
       ddl-auto: create  # 개발 중에는 create, 나중에 validate로 변경
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
 
