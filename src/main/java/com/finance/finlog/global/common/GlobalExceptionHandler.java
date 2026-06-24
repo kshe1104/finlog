@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@RestController // 모든 Controller 예외를 한곳에서 처리해주는 클래스
+@RestControllerAdvice // 모든 Controller 예외를 한곳에서 모아서 처리해주는 클래스 -> 예외처리 코드를 각 Controller 마다 작성할 필요가 없어짐
 public class GlobalExceptionHandler {
 
     // 직접 만든 비즈니스 예외 처리

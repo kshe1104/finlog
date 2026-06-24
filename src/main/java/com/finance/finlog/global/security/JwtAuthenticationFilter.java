@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider; // 의존성
 
     // 토큰이 없으면, 예외를 던지는 게 아니라 다음 필터로 넘김
     // 인증이 필요한 API인지 여부는 SecurityConfig 에서 결정
@@ -29,8 +29,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = extractToken(request); // 헤더에서 토큰을 추출
 
-        if(StringUtils.hasText(token)&& jwtTokenProvider.validateToken(token)){ // 토큰을 갖고있고, 토큰이 유효하다면
-            Long userId = jwtTokenProvider.getUserId(token);  //userID 저장
+        if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) { // 토큰을 갖고있고, 토큰이 유효하다면
+            Long userId = jwtTokenProvider.getUserId(token);  // userID 저장
 
             // SpringSecurity는 인증정보를 Authentication로 다루는데 UsernamePasswordAuthenticationToken은 그 구현체임.
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -47,7 +47,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String extractToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        if(StringUtils.hasText(bearerToken)&&bearerToken.startsWith("Bearer ")){
+        // "Bearer" 로 시작하는지 확인 후 "Bearer " 7글자 제거
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
         return null;

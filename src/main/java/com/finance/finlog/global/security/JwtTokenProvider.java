@@ -12,6 +12,7 @@ import java.util.Date;
 
 @Slf4j
 @Component
+// JWT 생성/검증 유틸
 public class JwtTokenProvider {
 
     private final SecretKey secretKey;

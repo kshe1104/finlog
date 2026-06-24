@@ -57,4 +57,14 @@ public class Subscription extends BaseEntity {
     public void updateNextBillingDate(LocalDate nextBillingDate) {
         this.nextBillingDate = nextBillingDate;
     }
+
+
+    public void update(String name, BigDecimal amount, int billingDay,
+                       LocalDate nextBillingDate, Category category) {
+        this.name = name;
+        this.amount = amount;
+        this.billingDay = billingDay;
+        this.nextBillingDate = nextBillingDate;
+        this.category = category;
+    }
 }

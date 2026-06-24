@@ -15,7 +15,7 @@ public interface SavingGoalRepository extends JpaRepository<SavingGoal, Long> {
     List<SavingGoal> findAllByUserAndStatus(User user, GoalStatus status);
 
     // 스케줄러용 - 기한 지난 진행중인 목표 조회
-    // Before은 <? 를 나타낸다.
+    // Before은 <? 조건을 나타낸다.
     List<SavingGoal> findAllByStatusAndDeadlineBefore(GoalStatus status, LocalDate date);
 
     Optional<SavingGoal> findByIdAndUser(Long id, User user);

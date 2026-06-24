@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat; // AssertJ 사용 시
 @DataJpaTest
 class UserRepositoryTest {
 
-    @Autowired
+    @Autowired // 의존성 주입
     private UserRepository userRepository;
 
     @Test
@@ -41,7 +41,7 @@ class UserRepositoryTest {
         Optional<User> result = userRepository.findByProviderAndProviderId(Provider.GOOGLE, "google-123");
 
         //then
-        assertThat(result).isPresent();
+        assertThat(result).isPresent(); // 실제 데이터가 안에 있는지 검사
         assertThat(result.get().getEmail()).isEqualTo("test@gmail.com");
         assertThat(result.get().getProvider()).isEqualTo(Provider.GOOGLE);
     }
@@ -55,7 +55,7 @@ class UserRepositoryTest {
         Optional<User> result = userRepository.findByProviderAndProviderId(Provider.GOOGLE, "not-exist-id");
 
         // then
-        assertThat(result).isEmpty();
+        assertThat(result).isEmpty(); // 비어있는지 확인
     }
 
 

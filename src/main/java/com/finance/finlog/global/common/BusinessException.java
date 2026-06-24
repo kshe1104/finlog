@@ -3,6 +3,8 @@ package com.finance.finlog.global.common;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+// 커스텀 예외가 없으면 예외마다 상태코드를 직접 지정해야함.
+// But, 커스텀 예외가 있으니 예외만 던지면됨
 @Getter
 public class BusinessException extends RuntimeException{
     private final HttpStatus status;

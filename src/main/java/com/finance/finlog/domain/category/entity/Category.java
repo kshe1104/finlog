@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor
-
 public class Category extends BaseEntity {
 
     @Id
@@ -34,4 +33,9 @@ public class Category extends BaseEntity {
     @Column(nullable = false)
     private boolean isDefault; // 기본 카테고리와 유저가 직접 만든 카테고리 구분
     //isDefault가 true인 카테고리는 삭제하지 못하도록
+
+    public void update(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
 }

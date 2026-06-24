@@ -26,7 +26,7 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
-                // CSRF 비활성화
+                // CSRF 비활성화 , 세션이 아닌 토큰을 사용하기 때문에 CSRF 공격 불가능
                 .csrf(AbstractHttpConfigurer::disable)
 
                 // 세션 사용 안함(JWT 사용)
@@ -36,7 +36,9 @@ public class SecurityConfig{
                 .authorizeHttpRequests(auth->auth.requestMatchers(
                         "/oauth2/**",
                         "/login/**",
-                        "/h2-console/**"
+                        "/h2-console/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
                 )
                         .permitAll()
                         .anyRequest().authenticated())

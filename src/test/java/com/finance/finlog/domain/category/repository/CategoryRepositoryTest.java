@@ -28,7 +28,7 @@ public class CategoryRepositoryTest {
 
     private User user;
 
-    @BeforeEach
+    @BeforeEach // 각 테스트마다 필요한 User 객체를 매번 만들지 않게 한번 만들고, 매번 자동 호출
     void setUp() {
         user = User.builder()
                 .email("test@gmail.com")
@@ -43,7 +43,7 @@ public class CategoryRepositoryTest {
 
     @Test
     @DisplayName("유저의 전체 카테고리를 조회할 수 있다.")
-    void findallByUser_success() {
+    void findAllByUser_success() {
         // given
         Category category1 = Category.builder()
                 .user(user)
@@ -56,7 +56,7 @@ public class CategoryRepositoryTest {
         Category category2 = Category.builder()
                 .user(user)
                 .name("월급")
-                .type(CategoryType.EXPENSE)
+                .type(CategoryType.INCOME)
                 .color("#0000FF")
                 .isDefault(true)
                 .build();
@@ -65,12 +65,12 @@ public class CategoryRepositoryTest {
         categoryRepository.save(category2);
 
         // when
-        List<Category> result = categoryRepository.findAllByUser(user);
+        List<Category> result = categoryRepository.findAllByUser(user); // 모든 유저들의 category 정보를 result에 List형식으로 저장
 
         // then
-        assertThat(result).hasSize(2);
-        assertThat(result).extracting("name")
-                .containsExactlyInAnyOrder("식비", "월급");
+        assertThat(result).hasSize(2); // 저장한 데이터의 갯수가 2개인지 검사
+        assertThat(result).extracting("name") // name 필드값만 뽑아냄
+                .containsExactlyInAnyOrder("식비", "월급"); // 식비와 월급만 들어있는지 체크 (하나라도 더있거나 없으면 실패)
     }
 
     @Test

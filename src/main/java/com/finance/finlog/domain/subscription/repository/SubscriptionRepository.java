@@ -14,6 +14,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
     List<Subscription> findAllByUserAndIsActive(User user, boolean isActive);
 
     // 스케줄러 용 - 오늘 결제일인 활성 구독 전체 조회
+    // Select * from subscriptions where next_billing_date =? and is active = true
     List<Subscription> findAllByNextBillingDateAndIsActiveTrue(LocalDate nextBillingDate);
 
     Optional<Subscription> findByIdAndUser(Long id, User user);
