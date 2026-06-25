@@ -1,9 +1,6 @@
 package com.finance.finlog.global.config;
 
-import com.finance.finlog.global.security.CustomOAuth2UserService;
-import com.finance.finlog.global.security.JwtAuthenticationFilter;
-import com.finance.finlog.global.security.JwtTokenProvider;
-import com.finance.finlog.global.security.OAuth2SuccessHandler;
+import com.finance.finlog.global.security.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +19,10 @@ public class SecurityConfig{
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
     private final JwtTokenProvider jwtTokenProvider;
+    private final RedisService redisService;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http, RedisService redisService) throws Exception{
         http
                 // CSRF 비활성화 , 세션이 아닌 토큰을 사용하기 때문에 CSRF 공격 불가능
                 .csrf(AbstractHttpConfigurer::disable)
@@ -48,7 +46,7 @@ public class SecurityConfig{
                         .successHandler(oAuth2SuccessHandler))
 
                 // JWT 필터 등록
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider,redisService),
                         UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

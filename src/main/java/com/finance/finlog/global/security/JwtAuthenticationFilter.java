@@ -20,6 +20,7 @@ import java.util.List;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider; // 의존성
+    private final RedisService redisService;
 
     // 토큰이 없으면, 예외를 던지는 게 아니라 다음 필터로 넘김
     // 인증이 필요한 API인지 여부는 SecurityConfig 에서 결정
@@ -29,7 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = extractToken(request); // 헤더에서 토큰을 추출
 
-        if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) { // 토큰을 갖고있고, 토큰이 유효하다면
+        if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token) && !redisService.isBlacklisted(token)) { // 토큰을 갖고있고, 토큰이 유효하다면
+
             Long userId = jwtTokenProvider.getUserId(token);  // userID 저장
 
             // SpringSecurity는 인증정보를 Authentication로 다루는데 UsernamePasswordAuthenticationToken은 그 구현체임.
