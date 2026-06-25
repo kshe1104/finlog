@@ -7,10 +7,28 @@ on:
   pull_request:
     branches: [ main ] # main으로 PR 날릴 때
 
+# 권한 추가
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
 jobs:
   test:
     name: Build & Test
     runs-on: ubuntu-latest
+
+      # Redis 서비스 컨테이너 추가
+    services:
+     redis:
+        image: redis:7.0
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       # 1. 코드 체크아웃
