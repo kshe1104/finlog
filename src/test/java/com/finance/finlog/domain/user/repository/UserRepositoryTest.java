@@ -1,5 +1,6 @@
 package com.finance.finlog.domain.user.repository;
 
+import com.finance.TestQueryDslConfig;
 import com.finance.finlog.domain.user.entity.Provider;
 import com.finance.finlog.domain.user.entity.Role;
 import com.finance.finlog.domain.user.entity.User;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat; // AssertJ 사용 시
 // H2 인메모리 DB 자동사용
 // SpringBootTest보다 가볍고 빠름
 @DataJpaTest
+@Import(TestQueryDslConfig.class)
 class UserRepositoryTest {
 
     @Autowired // 의존성 주입

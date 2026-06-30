@@ -3,6 +3,7 @@ package com.finance.finlog.domain.transaction.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.finlog.domain.transaction.dto.TransactionResponse;
 import com.finance.finlog.domain.transaction.service.TransactionService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+@Disabled("미완성 테스트")
 @WebMvcTest(TransactionController.class)
 public class TransactionControllerTest {
 

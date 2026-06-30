@@ -120,7 +120,7 @@ class CategoryServiceTest {
         // when & then
         assertThatThrownBy(() -> categoryService.createCategory(1L, request))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("이미 존재하는 카테고리 이름이에요");
+                .hasMessageContaining("이미 존재하는 카테고리 이름입니다");
     }
 
     @Test
@@ -139,7 +139,7 @@ class CategoryServiceTest {
         // when & then
         assertThatThrownBy(() -> categoryService.deleteCategory(1L, 1L))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("기본 카테고리는 삭제할 수 없어요");
+                .hasMessageContaining("기본 카테고리는 삭제할 수 없습니다");
     }
 
     @Test
@@ -151,7 +151,7 @@ class CategoryServiceTest {
         // when & then
         assertThatThrownBy(() -> categoryService.getCategories(999L))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("유저를 찾을 수 없어요");
+                .hasMessageContaining("유저를 찾을 수 없습니다");
     }
 
     // Lombok이 Setter를 막아놔서 리플렉션으로 필드 설정
