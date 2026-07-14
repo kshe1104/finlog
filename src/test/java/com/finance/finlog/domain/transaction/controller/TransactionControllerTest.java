@@ -13,6 +13,7 @@ import com.finance.finlog.domain.user.entity.Provider;
 import com.finance.finlog.domain.user.entity.Role;
 import com.finance.finlog.domain.user.entity.User;
 import com.finance.finlog.global.config.TestSecurityConfig;
+import org.hibernate.annotations.Synchronize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
