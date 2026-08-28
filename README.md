@@ -185,3 +185,13 @@ CREATE DATABASE finlog DEFAULT CHARACTER SET utf8mb4;
 - DTO 패턴으로 엔티티 노출 방지
 - IDOR 방어 (findByIdAndUser)
 - 정적 팩토리 메서드 패턴
+
+
+
+----
+## 🚀 배포
+
+- 배포 URL: https://finlog-production-0d9e.up.railway.app
+- Swagger: https://finlog-production-0d9e.up.railway.app/swagger-ui/index.html
+- 인프라: Railway (Docker 기반 배포)
+- CI/CD: GitHub Actions → main 브랜치 push 시 자동 배포
