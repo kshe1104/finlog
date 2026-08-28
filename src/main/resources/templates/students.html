@@ -1,0 +1,7 @@
+<ul xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+    <li th:each="name : ${names}" th:text = "${name}"></li>
+</ul>
+
+<a href="/categories">카테고리</a>
+
+<a th:href="@{/categories/{id}(id=${cateogiry.id})}">상세보기</a>

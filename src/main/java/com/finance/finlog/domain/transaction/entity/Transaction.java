@@ -16,22 +16,24 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor
+// 수입과 지출 내역
+// 누가 언제 얼마를 어떤 카테고리에서 수입/지출 했는지
 public class Transaction extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // 한명의 유저는 여러 거래내역을 가질 수 있다.
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // 한 카테고리에 여러 거래내역 존재가능
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscription_id") // 우저가 직접 입력한다면 null
+    @ManyToOne(fetch = FetchType.LAZY) // 한 구독에 여러 거래내역 존재가능
+    @JoinColumn(name = "subscription_id") // 식사나데이트로 수입/지출한다면 해당 컬럼은 null 가능
     private Subscription subscription;
 
     @Enumerated(EnumType.STRING)

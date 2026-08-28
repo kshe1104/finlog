@@ -20,5 +20,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findAllByUserAndTransactionDateBetweenOrderByTransactionDateDesc(User user, LocalDate start, LocalDate end);
 
     Optional<Transaction> findByIdAndUser(Long id, User user);
-
+    // findById만 하면 남의 가계부내역이어도 ID번호만 맞으면 조회되어버림
+    // ANDUser 으로 지금 로그인한 유저의 거래내역만 가져오기
 }

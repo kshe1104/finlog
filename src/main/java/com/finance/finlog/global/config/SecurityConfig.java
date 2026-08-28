@@ -36,10 +36,11 @@ public class SecurityConfig{
                         "/login/**",
                         "/h2-console/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
+                                "/v3/api-docs/**",
+                        "view/**"
                 )
-                        .permitAll()
-                        .anyRequest().authenticated())
+                        .permitAll() // 위 목록에 적힌 주소는 누구나 접근 가능(허용)
+                        .anyRequest().authenticated()) // 그 외 나머지 모든 주소는 '로그인 인증' 이 필수!
 
                 // OAuth2 로그인 설정
                 .oauth2Login(oauth2->oauth2.userInfoEndpoint(userInfo->userInfo.userService(customOAuth2UserService))

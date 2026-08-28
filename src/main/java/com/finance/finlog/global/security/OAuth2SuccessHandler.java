@@ -30,7 +30,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String token = jwtTokenProvider.generateToken(userId);
 
         // 프론트엔드로 토큰과 함께 리다이렉트
-        String redirectUrl = frontendUrl + "/oauth/callback?token=" + token;
+        String redirectUrl = "/view/oauth/callback?token=" + token;
         getRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 }

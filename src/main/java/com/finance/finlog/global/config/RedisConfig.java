@@ -15,7 +15,7 @@ import java.net.URL;
 @Configuration
 public class RedisConfig {
 
-    @Value("${spring.data.redis.url:}")
+    @Value("${spring.data.redis.url:}") // 환경변수처리
     private String redisUrl;
 
     @Value("${spring.data.redis.host:localhost}")

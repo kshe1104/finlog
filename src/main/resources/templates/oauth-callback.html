@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>로그인 성공</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 100px;}
+        .token-box{
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            word-break: break-all;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        button{
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1> 로그인 성공!</h1>
+<p>아래 토큰을 복사해서 Swagger나 Postman에서 사용하세요.</p>
+
+<div class = "token-box">
+    <span id = "tokenText" th:text="${token}">토큰이 여기 표시됨</span>
+</div>
+
+<button onclick="copyToken()">토큰 복사하기</button>
+
+<script th:inline="javascript">
+    const token = /*[[${token}]]*/ '';
+
+    function copyToken() {
+        navigator.clipboard.writeText(token);
+        alert("토큰이 복사됐어요!");
+    }
+</script>
+</body>
+</html>

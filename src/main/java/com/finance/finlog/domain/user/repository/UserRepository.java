@@ -19,6 +19,6 @@ Optional<User> findByProviderAndProviderId(Provider provider, String ProviderId)
     // 이메일 중복 확인
     // 이 메서드를 따로 만들면 findByEmail로 매번 전체 데이터 다 안가져와도됨
     boolean existsByEmail(String email);
-    // select count(*) > 0 from users where emial = ?
+    // select count(*) > 0 from users where email = ?
 
 }

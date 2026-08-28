@@ -22,7 +22,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
 
-    // 카테고리 목록 조회
+    // 카테고리 목록 조회(Read)
     public List<CategoryResponse> getCategories(Long userId) {
         User user = getUser(userId);
         return categoryRepository.findAllByUser(user)
@@ -31,7 +31,7 @@ public class CategoryService {
                 .toList();
     }
 
-    // 타입별 카테고리 조회
+    // 타입별 카테고리 조회(Read)
     public List<CategoryResponse> getCategoriesByType(Long userId, CategoryType type) {
         User user = getUser(userId);
         return categoryRepository.findAllByUserAndType(user, type)
@@ -41,10 +41,11 @@ public class CategoryService {
     }
 
     // 카테고리 생성
-    @Transactional // 메서드 - 쓰기용
+    @Transactional // 쓰기용(CUD) readonly=true 를 덮어씀
     public CategoryResponse createCategory(Long userId, CategoryRequest request) {
         User user = getUser(userId);
 
+        // 이름으로 중복 검증(DB)
         if (categoryRepository.existsByUserAndName(user, request.getName())) {
             throw BusinessException.badRequest("이미 존재하는 카테고리 이름입니다");
         }
@@ -74,8 +75,7 @@ public class CategoryService {
         }
 
         // 이름 중복 체크 (본인 카테고리 제외)
-        if (!category.getName().equals(request.getName()) &&
-                categoryRepository.existsByUserAndName(user, request.getName())) {
+        if (!category.getName().equals(request.getName()) && categoryRepository.existsByUserAndName(user, request.getName())) {
             throw BusinessException.badRequest("이미 존재하는 카테고리 이름입니다");
         }
 
@@ -97,6 +97,7 @@ public class CategoryService {
         categoryRepository.delete(category);
     }
 
+    // DB 유저조회 메서드
     private User getUser(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> BusinessException.notFound("유저를 찾을 수 없습니다"));

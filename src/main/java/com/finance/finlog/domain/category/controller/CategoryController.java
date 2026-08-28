@@ -26,7 +26,6 @@ public class CategoryController {
     @Operation(summary = "카테고리 목록 조회", description = "전체 또는 타입별 카테고리 조회")
     @GetMapping
     public ResponseEntity<CommonResponse<List<CategoryResponse>>> getCategories(@CurrentUser Long userId, @RequestParam(required = false) CategoryType type) {
-
         List<CategoryResponse> result = type != null ? categoryService.getCategoriesByType(userId, type) : categoryService.getCategories(userId);
 
         return ResponseEntity.ok(CommonResponse.success(result));
